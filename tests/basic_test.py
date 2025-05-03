@@ -1,3 +1,4 @@
+import math
 import time
 
 import powell_optimize as po
@@ -26,6 +27,8 @@ def test_powell_basic():
     print(f"Number of function evaluations: {result.nfev}")
     print(f"Success: {result.success}")
     print(f"Execution time: {end_time - start_time:.4f} seconds")
+    assert math.isclose(result.x[0], 0.0, abs_tol=1e-2)
+    assert math.isclose(result.x[1], 0.0, abs_tol=1e-2)
 
 
 def test_powell_rosenbrock():
@@ -61,6 +64,8 @@ def test_powell_rosenbrock():
     print(
         f"Distance from known minimum: [{abs(result.x[0]-1.0):.6f}, {abs(result.x[1]-1.0):.6f}]"
     )
+    assert math.isclose(result.x[0], 1.0, abs_tol=1e-2)
+    assert math.isclose(result.x[1], 1.0, abs_tol=1e-2)
 
 
 def test_powell_higher_dimension():

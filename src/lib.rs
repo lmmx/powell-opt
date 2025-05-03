@@ -45,11 +45,15 @@ pub fn powell_minimize(
 
     // Call the objective function with a Python object
     let call_func = |x: &[f64]| -> f64 {
+        // println!("Callback called with x = {:?}", x);
         #[allow(deprecated)]
         let args = PyList::new_bound(py, x);
         match func.call1(py, (args,)) {
             Ok(result) => match result.extract::<f64>(py) {
-                Ok(val) => val,
+                Ok(val) => {
+                    // println!("Got result: {}", val);
+                    val
+                }
                 Err(e) => {
                     eprintln!("Error extracting function result: {:?}", e);
                     f64::MAX

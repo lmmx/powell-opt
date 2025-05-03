@@ -36,7 +36,6 @@ fn test_pyoptions_conversion() {
 // Test with a basic quadratic function using direct rust calls
 // This tests the interaction with the underlying scirs2-optimize library
 #[test]
-#[ignore]
 fn test_quadratic_minimization() {
     // Define a simple quadratic function
     // Initial point

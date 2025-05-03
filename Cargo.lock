@@ -1232,8 +1232,7 @@ dependencies = [
 [[package]]
 name = "scirs2-core"
 version = "0.1.0-alpha.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1ae27d91684a30e4cb8b741f20e22752f1a898ac7fcab1210a3dd44fbd918089"
+source = "git+https://github.com/lmmx/scirs?branch=test-powell-quadratic#42e7d6879e585cad387f915b2c2f7d1c8de51bc7"
 dependencies = [
  "chrono",
  "ndarray 0.16.1",
@@ -1253,8 +1252,7 @@ dependencies = [
 [[package]]
 name = "scirs2-linalg"
 version = "0.1.0-alpha.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "96c5e59185630af1eccb6ef307ac980c6e930b4897be61f64f0155fe31b2d6a8"
+source = "git+https://github.com/lmmx/scirs?branch=test-powell-quadratic#42e7d6879e585cad387f915b2c2f7d1c8de51bc7"
 dependencies = [
  "approx 0.5.1",
  "nalgebra",
@@ -1274,8 +1272,7 @@ dependencies = [
 [[package]]
 name = "scirs2-optimize"
 version = "0.1.0-alpha.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "69ee91f2ddc8c135d8a853c584b3b2d56b08310bc4b42cf90c193fc2cc15c4ae"
+source = "git+https://github.com/lmmx/scirs?branch=test-powell-quadratic#42e7d6879e585cad387f915b2c2f7d1c8de51bc7"
 dependencies = [
  "argmin",
  "ndarray 0.16.1",

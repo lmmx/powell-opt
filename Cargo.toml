@@ -1,6 +1,6 @@
 [dependencies]
 pyo3 = "0.24.2"
-scirs2-optimize = "0.1.0-alpha.1"
+scirs2-optimize = { version = "0.1.0-alpha.1", git = "https://github.com/lmmx/scirs", branch = "test-powell-quadratic" }
 ndarray = "0.16.1"
 
 [lib]
