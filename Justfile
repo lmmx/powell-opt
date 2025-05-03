@@ -55,20 +55,20 @@ fix-eof-ws mode="":
     whitespace-format --add-new-line-marker-at-end-of-file \
           --new-line-marker=linux \
           --normalize-new-line-markers \
-          --exclude ".git/|.venv/|.*_cache|target/|.json$|.lock|.sw[op]$" \
+          --exclude ".git/|dist/|.venv/|.*_cache|target/|.json$|.lock|.sw[op]$" \
           $ARGS \
           .
 
 code-quality:
     taplo lint
-    taplo format --check
+    taplo format --check $(fd -H -E ".git/")
     just fix-eof-ws check
     cargo machete
     cargo fmt --check --all
 
 code-quality-fix:
     taplo lint
-    taplo format
+    taplo format $(fd -H -E ".git/")
     just fix-eof-ws
     cargo machete
     cargo fmt --all
