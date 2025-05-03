@@ -53,8 +53,8 @@ jobs:
             before: yum install -y openssl-devel.i686
           - runner: ubuntu-22.04
             target: aarch64
-          - runner: ubuntu-22.04
-            target: armv7
+          # - runner: ubuntu-22.04
+          #   target: armv7
           - runner: ubuntu-22.04
             target: s390x
           - runner: ubuntu-22.04
