@@ -1,4 +1,4 @@
-import powell_optimize as po
+import powell_opt as po
 
 
 def rosenbrock(x):
@@ -10,10 +10,10 @@ def rosenbrock(x):
 x0 = [0.0, 0.0]
 
 # Set options (optional)
-options = po.PyOptions(maxiter=1000, ftol=1e-6)
+options = po.Options(maxiter=1000, ftol=1e-6)
 
 # Minimize using Powell's method
-result = po.powell_minimize(rosenbrock, x0, options)
+result = po.minimize(rosenbrock, x0, options)
 
 print(f"Solution: {result.x}")
 print(f"Function value: {result.fun}")

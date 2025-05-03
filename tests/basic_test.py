@@ -1,10 +1,10 @@
 import math
 import time
 
-import powell_optimize as po
+import powell_opt as po
 
 
-def test_powell_basic():
+def test_powell_quadratic():
     """Basic example of Powell's method for a simple quadratic function"""
 
     def quadratic(x):
@@ -18,7 +18,7 @@ def test_powell_basic():
 
     # Minimize using Powell's method
     start_time = time.time()
-    result = po.powell_minimize(quadratic, x0)
+    result = po.minimize(quadratic, x0)
     end_time = time.time()
 
     print(f"Solution: {result.x}")
@@ -27,6 +27,7 @@ def test_powell_basic():
     print(f"Number of function evaluations: {result.nfev}")
     print(f"Success: {result.success}")
     print(f"Execution time: {end_time - start_time:.4f} seconds")
+    assert math.isclose(result.fun, 0.0, abs_tol=1e-2)
     assert math.isclose(result.x[0], 0.0, abs_tol=1e-2)
     assert math.isclose(result.x[1], 0.0, abs_tol=1e-2)
 
@@ -46,11 +47,11 @@ def test_powell_rosenbrock():
     x0 = [0.0, 0.0]
 
     # Set options
-    options = po.PyOptions(maxiter=2000, ftol=1e-8)
+    options = po.Options(maxiter=2000, ftol=1e-8)
 
     # Minimize using Powell's method
     start_time = time.time()
-    result = po.powell_minimize(rosenbrock, x0, options)
+    result = po.minimize(rosenbrock, x0, options)
     end_time = time.time()
 
     print(f"Solution: {result.x}")
@@ -64,6 +65,7 @@ def test_powell_rosenbrock():
     print(
         f"Distance from known minimum: [{abs(result.x[0]-1.0):.6f}, {abs(result.x[1]-1.0):.6f}]"
     )
+    assert math.isclose(result.fun, 0.0, abs_tol=1e-2)
     assert math.isclose(result.x[0], 1.0, abs_tol=1e-2)
     assert math.isclose(result.x[1], 1.0, abs_tol=1e-2)
 
@@ -82,7 +84,7 @@ def test_powell_higher_dimension():
 
     # Minimize using Powell's method
     start_time = time.time()
-    result = po.powell_minimize(sum_squares, x0)
+    result = po.minimize(sum_squares, x0)
     end_time = time.time()
 
     print(f"Solution (10 dimensions): {result.x}")
