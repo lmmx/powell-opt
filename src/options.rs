@@ -3,7 +3,7 @@ use pyo3::prelude::*;
 use scirs2_optimize::unconstrained::Options;
 
 /// Options for the Powell optimizer
-#[pyclass]
+#[pyclass(name = "Options")]
 #[derive(Clone)]
 pub struct PyOptions {
     #[pyo3(get, set)]

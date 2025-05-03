@@ -20,7 +20,7 @@ mod tests;
 
 /// Python bindings for the Powell optimization method from scirs2-optimize.
 #[pymodule]
-fn powell_optimize(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn powell_opt(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PyOptions>()?;
     m.add_class::<PyMinimizeResult>()?;
     m.add_function(wrap_pyfunction!(powell_minimize, m)?)?;
@@ -29,7 +29,7 @@ fn powell_optimize(m: &Bound<'_, PyModule>) -> PyResult<()> {
 }
 
 /// Minimizes a scalar function using Powell's method.
-#[pyfunction]
+#[pyfunction(name = "minimize")]
 #[pyo3(signature = (func, x0, options=None))]
 pub fn powell_minimize(
     py: Python,

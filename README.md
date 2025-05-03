@@ -65,7 +65,7 @@ Minimizes a scalar function using Powell's method.
 **Parameters:**
 - `func`: A callable that takes a list of parameters and returns a scalar value
 - `x0`: Initial guess (list of parameters)
-- `options`: Optional `PyOptions` object with algorithm parameters
+- `options`: Optional `Options` object with algorithm parameters
 
 **Returns:**
 - `MinimizeResult` object containing the optimization results
