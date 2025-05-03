@@ -27,7 +27,6 @@ Powell's method is a derivative-free optimization algorithm that minimizes funct
 
 ```python
 import powell_optimize as po
-import numpy as np
 
 def rosenbrock(x):
     """Rosenbrock function - a classical test case for optimization"""
@@ -47,6 +46,15 @@ print(f"Function value: {result.fun}")
 print(f"Number of iterations: {result.nit}")
 print(f"Success: {result.success}")
 ```
+⇣
+```
+Solution: [1.0000000000000002, 1.0000000000000007]
+Function value: 4.979684464207637e-30
+Number of iterations: 19
+Success: True
+```
+
+- Find this at `examples/basic_usage.py` and in the tests as `test_powell_rosenbrock()`
 
 ## API Reference
 
@@ -69,7 +77,11 @@ Class for configuring the Powell optimization algorithm.
 **Parameters:**
 - `maxiter`: Maximum number of iterations (optional)
 - `ftol`: Relative tolerance for convergence in function value (optional)
-- `disp`: Whether to print convergence messages (default: False)
+- `gtol`: Relative tolerance for convergence in gradient norm (optional)
+- `disp`: Whether to print convergence progress messages (default: False)
+- `eps`: Small value used for numerical stability in calculations (optional)
+- `finite_diff_rel_step`: Relative step size for finite difference approximation of derivatives (optional)
+- `return_all`: Whether to return intermediate solutions from all iterations (default: False)
 
 ### `PyMinimizeResult`
 

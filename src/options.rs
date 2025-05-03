@@ -30,17 +30,25 @@ pub struct PyOptions {
 
 #[pymethods]
 impl PyOptions {
-    #[pyo3(signature = (maxiter=None, ftol=None, disp=None))]
+    #[pyo3(signature = (maxiter=None, ftol=None, gtol=None, eps=None, finite_diff_rel_step=None, disp=false, return_all=false))]
     #[new]
-    pub fn new(maxiter: Option<usize>, ftol: Option<f64>, disp: Option<bool>) -> Self {
+    pub fn new(
+        maxiter: Option<usize>,
+        ftol: Option<f64>,
+        gtol: Option<f64>,
+        eps: Option<f64>,
+        finite_diff_rel_step: Option<f64>,
+        disp: Option<bool>,
+        return_all: Option<bool>,
+    ) -> Self {
         PyOptions {
             maxiter,
             ftol,
+            gtol,
+            eps,
+            finite_diff_rel_step,
             disp: disp.unwrap_or(false),
-            gtol: None,
-            eps: None,
-            finite_diff_rel_step: None,
-            return_all: false,
+            return_all: return_all.unwrap_or(false),
         }
     }
 }

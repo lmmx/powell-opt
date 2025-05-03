@@ -41,7 +41,8 @@ pub fn powell_minimize(
     let x0_array = py_list_to_array1(x0.bind(py))?;
 
     // Create options
-    let options_struct = options.unwrap_or_else(|| PyOptions::new(None, None, None));
+    let options_struct =
+        options.unwrap_or_else(|| PyOptions::new(None, None, None, None, None, None, None));
 
     // Call the objective function with a Python object
     let call_func = |x: &[f64]| -> f64 {
