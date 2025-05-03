@@ -1,18 +1,18 @@
-# powell-optimize-py
+# powell-opt
 
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm.fming.dev)
-[![PyPI](https://img.shields.io/pypi/v/powell-optimize-py.svg)](https://pypi.org/project/powell-optimize-py)
-[![Supported Python versions](https://img.shields.io/pypi/pyversions/powell-optimize-py.svg)](https://pypi.org/project/powell-optimize-py)
-[![License](https://img.shields.io/pypi/l/powell-optimize-py.svg)](https://pypi.python.org/pypi/powell-optimize-py)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/lmmx/powell-optimize/master.svg)](https://results.pre-commit.ci/latest/github/lmmx/powell-optimize/master)
+[![PyPI](https://img.shields.io/pypi/v/powell-opt.svg)](https://pypi.org/project/powell-opt)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/powell-opt.svg)](https://pypi.org/project/powell-opt)
+[![License](https://img.shields.io/pypi/l/powell-opt.svg)](https://pypi.python.org/pypi/powell-opt)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/lmmx/powell-opt/master.svg)](https://results.pre-commit.ci/latest/github/lmmx/powell-opt/master)
 
-Python bindings for the Powell optimization method from the `scirs2-optimize` Rust library.
+Python bindings for the _Powell's method_ optimisation algorithm from the `scirs2-optimize` Rust library.
 
 ## Installation
 
 ```bash
-pip install powell-optimize-py
+pip install powell-opt
 ```
 
 ## About Powell's Method
@@ -23,10 +23,10 @@ Powell's method is a derivative-free optimization algorithm that minimizes funct
 - Have discontinuities or non-smooth regions
 - Have relatively few dimensions
 
-## Usage Example
+## Usage
 
 ```python
-import powell_optimize as po
+import powell_opt as po
 
 def rosenbrock(x):
     """Rosenbrock function - a classical test case for optimization"""
@@ -36,10 +36,10 @@ def rosenbrock(x):
 x0 = [0.0, 0.0]
 
 # Set options (optional)
-options = po.PyOptions(maxiter=1000, ftol=1e-6)
+options = po.Options(maxiter=1000, ftol=1e-6)
 
 # Minimize using Powell's method
-result = po.powell_minimize(rosenbrock, x0, options)
+result = po.minimize(rosenbrock, x0, options)
 
 print(f"Solution: {result.x}")
 print(f"Function value: {result.fun}")
@@ -58,19 +58,19 @@ Success: True
 
 ## API Reference
 
-### `powell_minimize(func, x0, options=None)`
+### `minimize(func, x0, options=None)`
 
 Minimizes a scalar function using Powell's method.
 
 **Parameters:**
 - `func`: A callable that takes a list of parameters and returns a scalar value
 - `x0`: Initial guess (list of parameters)
-- `options`: Optional `PyOptions` object with algorithm parameters
+- `options`: Optional `Options` object with algorithm parameters
 
 **Returns:**
-- `PyMinimizeResult` object containing the optimization results
+- `MinimizeResult` object containing the optimization results
 
-### `PyOptions`
+### `Options`
 
 Class for configuring the Powell optimization algorithm.
 
@@ -83,7 +83,7 @@ Class for configuring the Powell optimization algorithm.
 - `finite_diff_rel_step`: Relative step size for finite difference approximation of derivatives (optional)
 - `return_all`: Whether to return intermediate solutions from all iterations (default: False)
 
-### `PyMinimizeResult`
+### `MinimizeResult`
 
 Class containing optimization results.
 
@@ -98,6 +98,8 @@ Class containing optimization results.
 ## Performance
 
 This implementation leverages Rust's performance through PyO3 bindings, making it significantly faster than pure Python implementations for computationally intensive problems.
+
+(TODO: benchmark!)
 
 ## Contributing
 
