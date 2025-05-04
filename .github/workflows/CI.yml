@@ -49,21 +49,33 @@ jobs:
           - runner: ubuntu-22.04
             target: x86_64
             before: yum install -y openssl-devel
+            dockeropts: ""
+            manylinux: auto
           - runner: ubuntu-22.04
-            target: i686-unknown-linux-gnu
+            target: x86
             before: yum install -y openssl-devel.i686 pkg-config
+            dockeropts: ""
+            manylinux: 2_28
           - runner: ubuntu-22.04
             target: aarch64
             before: sudo apt-get update -y && sudo apt-get install pkg-config -y
+            dockeropts: ""
+            manylinux: 2_28
           - runner: ubuntu-22.04
             target: armv7
             before: sudo apt-get update -y && sudo apt-get install pkg-config -y
+            dockeropts: ""
+            manylinux: auto
           - runner: ubuntu-22.04
             target: s390x
             before: sudo apt-get update -y && sudo apt-get install pkg-config -y
+            dockeropts: ""
+            manylinux: auto
           - runner: ubuntu-22.04
             target: ppc64le
             before: sudo apt-get update -y && sudo apt-get install pkg-config -y
+            dockeropts: ""
+            manylinux: auto
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -75,9 +87,10 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-          manylinux: auto
+          manylinux: ${{ matrix.platform.manylinux }}
           before-script-linux: |
             ${{ matrix.platform.before }}
+          docker-options: ${{ matrix.platform.dockeropts }}
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
