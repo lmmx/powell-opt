@@ -2,6 +2,5 @@
 /coverage
 dist/
 .*cache
-
-.sw[op]
+*.sw[op]
 .venv/
