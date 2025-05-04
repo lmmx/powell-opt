@@ -48,9 +48,9 @@ jobs:
           - runner: ubuntu-22.04
             target: x86_64
             before: yum install -y openssl-devel
-          - runner: ubuntu-22.04
-            target: i686-unknown-linux-gnu
-            before: yum install -y openssl-devel.i686
+          # - runner: ubuntu-22.04
+          #   target: i686-unknown-linux-gnu
+          #   before: yum install -y openssl-devel.i686
           # - runner: ubuntu-22.04
           #   target: aarch64
           # - runner: ubuntu-22.04
