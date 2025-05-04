@@ -29,6 +29,9 @@ clippy:
 bench:
     ./run_bench.sh
 
+bench-exec:
+    ./bench/bench_execution_only.py
+
 test *args:
     cargo nextest run {{args}} < /dev/null
 

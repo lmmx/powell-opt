@@ -672,6 +672,7 @@ source = { editable = "." }
 bench = [
     { name = "numpy", version = "2.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "numpy", version = "2.2.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+    { name = "rich" },
     { name = "scipy", version = "1.13.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "scipy", version = "1.15.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
 ]
@@ -693,6 +694,7 @@ requires-dist = [
     { name = "pdm-bump", marker = "extra == 'dev'", specifier = ">=0.9.10" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.1.0" },
     { name = "pytest", marker = "extra == 'tests'", specifier = ">=8.3.5" },
+    { name = "rich", marker = "extra == 'bench'", specifier = ">=14.0.0" },
     { name = "scipy", marker = "extra == 'bench'", specifier = ">=1.13.1" },
 ]
 provides-extras = ["dev", "bench", "tests"]

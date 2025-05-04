@@ -80,6 +80,116 @@ Summary
 Benchmark completed!
 ```
 
+To exclude the effect of import time, and measure the execution itself,
+it looks like quadratics are at least 5x faster:
+
+```
+$ just bench-exec
+./bench/bench_execution_only.py
+Benchmarking Powell Method implementations (excluding import time)
+
+Benchmark: rosenbrock (2D)
+------------------------------------------------------------
+Benchmark 1: scipy
+  Time (mean ± σ):     2.9 ms ± 0.1 ms    [User: 3371.0 ms, System: 40.9 ms]
+  Range (min … max):   2.9 ms … 3.1 ms    10 runs
+
+Benchmark 2: powell-opt
+  Time (mean ± σ):     0.8 ms ± 0.0 ms    [User: 9.3 ms, System: 3.3 ms]
+  Range (min … max):   0.8 ms … 0.8 ms    239 runs
+
+Summary
+  powell-opt ran
+   3.76 ± 0.12 times faster than scipy
+------------------------------------------------------------
+Benchmark: quadratic (2D)
+------------------------------------------------------------
+Benchmark 1: scipy
+  Time (mean ± σ):     0.2 ms ± 0.0 ms    [User: 3371.0 ms, System: 40.9 ms]
+  Range (min … max):   0.2 ms … 0.3 ms    10 runs
+
+Benchmark 2: powell-opt
+  Time (mean ± σ):     0.0 ms ± 0.0 ms    [User: 9.3 ms, System: 3.3 ms]
+  Range (min … max):   0.0 ms … 0.0 ms    239 runs
+
+Summary
+  powell-opt ran
+   5.11 ± 0.33 times faster than scipy
+------------------------------------------------------------
+Benchmark: quadratic (10D)
+------------------------------------------------------------
+Benchmark 1: scipy
+  Time (mean ± σ):     0.7 ms ± 0.1 ms    [User: 3371.0 ms, System: 40.9 ms]
+  Range (min … max):   0.7 ms … 1.1 ms    10 runs
+
+Benchmark 2: powell-opt
+  Time (mean ± σ):     0.1 ms ± 0.0 ms    [User: 9.3 ms, System: 3.3 ms]
+  Range (min … max):   0.1 ms … 0.1 ms    239 runs
+
+Summary
+  powell-opt ran
+   12.53 ± 2.12 times faster than scipy
+------------------------------------------------------------
+Benchmark: sum_squares (10D)
+------------------------------------------------------------
+Benchmark 1: scipy
+  Time (mean ± σ):     1.3 ms ± 0.0 ms    [User: 3371.0 ms, System: 40.9 ms]
+  Range (min … max):   1.3 ms … 1.3 ms    10 runs
+
+Benchmark 2: powell-opt
+  Time (mean ± σ):     0.8 ms ± 0.0 ms    [User: 9.3 ms, System: 3.3 ms]
+  Range (min … max):   0.8 ms … 0.8 ms    239 runs
+
+Summary
+  powell-opt ran
+   1.63 ± 0.03 times faster than scipy
+------------------------------------------------------------
+Benchmark: sum_squares (50D)
+------------------------------------------------------------
+Benchmark 1: scipy
+  Time (mean ± σ):     9.5 ms ± 0.0 ms    [User: 3371.0 ms, System: 40.9 ms]
+  Range (min … max):   9.5 ms … 9.6 ms    10 runs
+
+Benchmark 2: powell-opt
+  Time (mean ± σ):     14.2 ms ± 0.1 ms    [User: 9.3 ms, System: 3.3 ms]
+  Range (min … max):   14.1 ms … 14.5 ms    239 runs
+
+Summary
+  scipy ran
+   1.49 ± 0.01 times faster than powell-opt
+------------------------------------------------------------
+Benchmark: sum_squares (100D)
+------------------------------------------------------------
+Benchmark 1: scipy
+  Time (mean ± σ):     27.3 ms ± 0.1 ms    [User: 3371.0 ms, System: 40.9 ms]
+  Range (min … max):   27.2 ms … 27.6 ms    10 runs
+
+Benchmark 2: powell-opt
+  Time (mean ± σ):     51.6 ms ± 0.2 ms    [User: 9.3 ms, System: 3.3 ms]
+  Range (min … max):   51.5 ms … 52.1 ms    239 runs
+
+Summary
+  scipy ran
+   1.89 ± 0.01 times faster than powell-opt
+------------------------------------------------------------
+
+Overall Summary
+------------------------------------------------------------
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Function    ┃ Dimensions ┃ SciPy (ms) ┃ Rust (ms) ┃ Speedup ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━┩
+│ rosenbrock  │ 2          │ 2.9        │ 0.8       │ 3.76x   │
+│ quadratic   │ 2          │ 0.2        │ 0.0       │ 5.11x   │
+│ quadratic   │ 10         │ 0.7        │ 0.1       │ 12.53x  │
+│ sum_squares │ 10         │ 1.3        │ 0.8       │ 1.63x   │
+│ sum_squares │ 50         │ 9.5        │ 14.2      │ 0.67x   │
+│ sum_squares │ 100        │ 27.3       │ 51.6      │ 0.53x   │
+└─────────────┴────────────┴────────────┴───────────┴─────────┘
+------------------------------------------------------------
+Average speedup: 4.04x
+Benchmark completed!
+```
+
 ## API Reference
 
 ### `minimize(func, x0, options=None)`
