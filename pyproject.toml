@@ -35,7 +35,7 @@ dev = [
   "pdm-bump>=0.9.10",
   "pre-commit>=4.1.0",
 ]
-bench = ["numpy>=1.20.0"]
+bench = ["numpy>=1.20.0", "scipy>=1.13.1"]
 tests = ["pytest>=8.3.5"]
 
 [project.urls]

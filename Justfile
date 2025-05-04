@@ -25,6 +25,10 @@ clippy-all:
 clippy:
     cargo clippy --workspace --all-targets --target-dir target/clippy -- -D warnings
 
+[working-directory: 'bench']
+bench:
+    ./run_bench.sh
+
 test *args:
     cargo nextest run {{args}} < /dev/null
 
