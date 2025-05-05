@@ -21,6 +21,9 @@ mod tests;
 /// Python bindings for the Powell optimization method from scirs2-optimize.
 #[pymodule]
 fn powell_opt(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    #[cfg(feature = "openssl-vendored")]
+    openssl_probe::init_ssl_cert_env_vars();
+
     m.add_class::<PyOptions>()?;
     m.add_class::<PyMinimizeResult>()?;
     m.add_function(wrap_pyfunction!(powell_minimize, m)?)?;

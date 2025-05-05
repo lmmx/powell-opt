@@ -50,31 +50,37 @@ jobs:
             target: x86_64
             before: yum install -y openssl-devel
             dockeropts: ""
+            features: ""
             manylinux: auto
           - runner: ubuntu-22.04
             target: x86
             before: yum install -y openssl-devel.i686 pkg-config
             dockeropts: ""
+            features: ""
             manylinux: 2_28
           - runner: ubuntu-22.04
             target: aarch64
             before: sudo apt-get update -y && sudo apt-get install pkg-config -y
-            dockeropts: ""
+            dockeropts: --env OPENSSL_DIR=/usr
+            features: "--features openssl-vendored"
             manylinux: 2_28
           - runner: ubuntu-22.04
             target: armv7
             before: sudo apt-get update -y && sudo apt-get install pkg-config -y
-            dockeropts: ""
+            dockeropts: --env OPENSSL_DIR=/usr
+            features: "--features openssl-vendored"
             manylinux: auto
           - runner: ubuntu-22.04
             target: s390x
             before: sudo apt-get update -y && sudo apt-get install pkg-config -y
-            dockeropts: ""
+            dockeropts: --env OPENSSL_DIR=/usr
+            features: "--features openssl-vendored"
             manylinux: auto
           - runner: ubuntu-22.04
             target: ppc64le
             before: sudo apt-get update -y && sudo apt-get install pkg-config -y
-            dockeropts: ""
+            dockeropts: --env OPENSSL_DIR=/usr
+            features: "--features openssl-vendored"
             manylinux: auto
     steps:
       - uses: actions/checkout@v4
