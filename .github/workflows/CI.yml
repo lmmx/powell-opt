@@ -66,8 +66,7 @@ jobs:
               ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
               ls -l /usr/bin/i686-linux-gnu-gcc && \
               /usr/bin/i686-linux-gnu-gcc --version && \
-              i686-linux-gnu-gcc --version && \
-              ls -la /usr/lib/i386-linux-gnu/libssl* /usr/lib/i386-linux-gnu/libcrypto* /usr/lib/libssl* /usr/lib/libcrypto*
+              i686-linux-gnu-gcc --version
             dockeropts: >
               --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
               --env CFLAGS_i686_unknown_linux_gnu=-m32
