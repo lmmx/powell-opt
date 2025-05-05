@@ -73,11 +73,8 @@ jobs:
               ls -l /usr/bin/i686-linux-gnu-gcc && \
               /usr/bin/i686-linux-gnu-gcc --version && \
               i686-linux-gnu-gcc --version && \
-              # Check where the SSL libraries are located
-              find /usr -name "libssl.so*" && \
-              find /usr -name "libcrypto.so*" && \
-              find /usr -name "opensslv.h" && \
-              mkdir -p .cargo && \
+              mkdir -p .cargo  || exit 1
+
               cat > .cargo/config.toml << EOF
               [build]
               target = "i686-unknown-linux-gnu"

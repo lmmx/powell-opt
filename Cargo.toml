@@ -1,5 +1,5 @@
 [dependencies]
-pyo3 = { version = "0.24.2", features = ["extension-module", "abi3-py39"] }
+pyo3 = "0.24.2"
 scirs2-optimize = { version = "0.1.0-alpha.1", git = "https://github.com/lmmx/scirs", branch = "test-powell-quadratic" }
 ndarray = "0.16.1"
 # For CI wheel building:
@@ -17,7 +17,7 @@ crate-type = ["cdylib"]
 [package]
 name = "powell-opt"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 authors = ["Louis Maddox <louismmx@gmail.com>"]
 description = "Python bindings for the Powell method from scirs2-optimize"
 readme = "README.md"
