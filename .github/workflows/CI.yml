@@ -58,14 +58,14 @@ jobs:
           - runner: ubuntu-22.04
             target: x86
             before: |
-              dnf search fortran
+              # dnf search fortran
               yum install \
                 openssl-devel.i686 \
                 openssl-devel.x86_64 \
                 glibc-devel.i686 \
                 libstdc++-devel.i686 \
                 gcc-toolset-14-libstdc++-devel.i686 \
-                gcc-gfortran.i686 \
+                libgfortran.i686 \
                 -y || exit 1
 
               which gcc && \
