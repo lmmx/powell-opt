@@ -69,6 +69,8 @@ jobs:
                 -y || exit 1
 
               echo "Listing Fortran possibilities:"
+              command -v gfortran  ||  which gfortran
+              echo "Try find"
               find /usr -type f -executable -name '*fortran*'
               echo "FIN!"
               exit 3
