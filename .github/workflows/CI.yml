@@ -72,6 +72,7 @@ jobs:
               # Check where the SSL libraries are located
               find /usr -name "libssl.so*" && \
               find /usr -name "libcrypto.so*" && \
+              find /usr -name "opensslv.h" && \
               mkdir -p .cargo && \
               cat > .cargo/config.toml << EOF
               [build]
