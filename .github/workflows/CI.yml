@@ -57,10 +57,10 @@ jobs:
             target: x86
             before: |
               yum install -y \
-                openssl-devel \
-                glibc-devel \
-                libstdc++-devel \
-                gcc-toolset-14-libstdc++-devel \
+                openssl-devel.i686 \
+                glibc-devel.i686 \
+                libstdc++-devel.i686 \
+                gcc-toolset-14-libstdc++-devel.i686 \
                 && \
               which gcc && \
               ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
