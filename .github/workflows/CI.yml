@@ -78,10 +78,10 @@ jobs:
               cat > .cargo/config.toml << EOF
               [build]
               target = "i686-unknown-linux-gnu"
-              rustflags = ["-C", "target-feature=+crt-static"]
+              rustflags = ["-C", "target-feature=+crt-static", "-C", "link-arg=-m32"]
               
               [target.i686-unknown-linux-gnu]
-              rustflags = ["-C", "link-arg=-m32"]
+              rustflags = ["-C", "target-feature=+crt-static", "-C", "link-arg=-m32"]
               EOF
             dockeropts: >
               --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
@@ -93,7 +93,7 @@ jobs:
               --env PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib64/pkgconfig
               --env OPENSSL_DIR=/usr
             features: ""
-            manylinux: 2_28
+            manylinux: auto
 
           - runner: ubuntu-22.04
             target: aarch64
