@@ -48,7 +48,19 @@ jobs:
         platform:
           - runner: ubuntu-22.04
             target: x86_64
-            before: yum install -y openssl-devel && openssl version -d
+            before: |
+              yum install -y \
+                openssl-devel \
+                glibc-devel \
+                libstdc++-devel \
+                gcc-toolset-14-libstdc++-devel \
+                && \
+              which gcc && \
+              ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
+              ls -l /usr/bin/i686-linux-gnu-gcc && \
+              /usr/bin/i686-linux-gnu-gcc --version && \
+              i686-linux-gnu-gcc --version && \
+              ls -la /usr/lib/i386-linux-gnu/libssl* /usr/lib/i386-linux-gnu/libcrypto* /usr/lib/libssl* /usr/lib/libcrypto*
             dockeropts: ""
             features: ""
             manylinux: auto
@@ -57,11 +69,12 @@ jobs:
             before: yum install -y openssl-devel.i686
             dockeropts: >
               --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
+              --env CFLAGS_i686_unknown_linux_gnu=-m32
               --env CFLAGS=-m32
-              --env LIBRARY_PATH=/usr/lib:$LIBRARY_PATH
-              --env LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+              --env LIBRARY_PATH=/usr/lib:/usr/lib/i386-linux-gnu:$LIBRARY_PATH
+              --env LD_LIBRARY_PATH=/usr/lib:/usr/lib/i386-linux-gnu:$LD_LIBRARY_PATH
               --env PKG_CONFIG_ALLOW_CROSS=1
-              --env PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib64/pkgconfig
+              --env PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib64/pkgconfig
               --env OPENSSL_DIR=/usr
             features: ""
             manylinux: 2_28
