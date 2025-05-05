@@ -1,5 +1,5 @@
 [dependencies]
-pyo3 = "0.24.2"
+pyo3 = { version = "0.24.2", features = ["extension-module", "abi3-py39"] }
 scirs2-optimize = { version = "0.1.0-alpha.1", git = "https://github.com/lmmx/scirs", branch = "test-powell-quadratic" }
 ndarray = "0.16.1"
 # For CI wheel building:
