@@ -5,10 +5,11 @@ ndarray = "0.16.1"
 # For CI wheel building:
 # https://github.com/PyO3/maturin-action/discussions/162#discussioncomment-7978369
 openssl = { version = "0.10", features = ["vendored"], optional = true }
-ndarray-linalg = { version = "0.17", features = ["openblas-system"] }
+ndarray-linalg = { version = "0.17" }
 openssl-probe = { version = "0.1", optional = true }
 
 [features]
+openblas-system = ["ndarray-linalg/openblas-system"]
 openssl-vendored = ["dep:openssl", "dep:openssl-probe"]
 
 [lib]
