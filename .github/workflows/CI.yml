@@ -48,7 +48,7 @@ jobs:
         platform:
           - runner: ubuntu-22.04
             target: x86_64
-            before: yum install -y openssl-devel
+            before: yum install -y openssl-devel && openssl version -d
             dockeropts: ""
             features: ""
             manylinux: auto
