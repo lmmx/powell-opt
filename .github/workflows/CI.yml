@@ -68,13 +68,6 @@ jobs:
                 libgfortran.i686 \
                 -y || exit 1
 
-              echo "Listing Fortran possibilities:"
-              command -v gfortran  ||  which gfortran
-              echo "Try find"
-              find /usr -type f -executable -name '*fortran*'
-              echo "FIN!"
-              exit 3
-
               which gcc && \
               ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
               ls -l /usr/bin/i686-linux-gnu-gcc && \
@@ -98,7 +91,7 @@ jobs:
               --env OPENBLAS_TARGET=CORE2
               --env OPENBLAS_CC=/usr/bin/i686-linux-gnu-gcc
               --env OPENBLAS_HOSTCC=/usr/bin/gcc
-              --env OPENBLAS_FC=/usr/bin/i686-linux-gnu-gfortran
+              --env OPENBLAS_FC=/opt/rh/gcc-toolset-14/root/usr/bin/gfortran
               --env CFLAGS_i686_unknown_linux_gnu=-m32
               --env CFLAGS=-m32
               --env LIBRARY_PATH=/usr/lib:/usr/lib/i386-linux-gnu:$LIBRARY_PATH
