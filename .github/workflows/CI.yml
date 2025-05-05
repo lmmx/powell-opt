@@ -75,6 +75,8 @@ jobs:
               i686-linux-gnu-gcc --version && \
               mkdir -p .cargo  || exit 1
 
+              rustup target add i686-unknown-linux-gnu
+
               cat > .cargo/config.toml << EOF
               [build]
               target = "i686-unknown-linux-gnu"
