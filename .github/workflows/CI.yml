@@ -65,7 +65,8 @@ jobs:
                 glibc-devel.i686 \
                 libstdc++-devel.i686 \
                 gcc-toolset-14-libstdc++-devel.i686 \
-                libgfortran.i686 \
+                 openblas-devel.i686 \
+                 lapack-devel.i686 \
                 -y || exit 1
 
               which gcc && \
@@ -88,10 +89,6 @@ jobs:
             dockeropts: >
               --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
               --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
-              --env OPENBLAS_TARGET=CORE2
-              --env OPENBLAS_CC=/usr/bin/i686-linux-gnu-gcc
-              --env OPENBLAS_HOSTCC=/usr/bin/gcc
-              --env OPENBLAS_FC=/opt/rh/gcc-toolset-14/root/usr/bin/gfortran
               --env CFLAGS_i686_unknown_linux_gnu=-m32
               --env CFLAGS=-m32
               --env LIBRARY_PATH=/usr/lib:/usr/lib/i386-linux-gnu:$LIBRARY_PATH
