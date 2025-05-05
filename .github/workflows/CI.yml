@@ -48,7 +48,9 @@ jobs:
         platform:
           - runner: ubuntu-22.04
             target: x86_64
-            before: yum install -y openssl-devel
+            before: |
+              set -e
+              yum install -y openssl-devel
             dockeropts: ""
             features: ""
             manylinux: auto
@@ -56,13 +58,14 @@ jobs:
           - runner: ubuntu-22.04
             target: x86
             before: |
+              set -e
               yum install \
                 openssl-devel.i686 \
                 openssl-devel.x86_64 \
                 glibc-devel.i686 \
                 libstdc++-devel.i686 \
                 gcc-toolset-14-libstdc++-devel.i686 \
-                gfortran.i686 \
+                gcc-gfortran.i686 \
                 -y && \
               which gcc && \
               ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
@@ -96,28 +99,36 @@ jobs:
 
           - runner: ubuntu-22.04
             target: aarch64
-            before: sudo apt-get update -y && sudo apt-get install pkg-config -y
+            before: |
+              set -e
+              sudo apt-get update -y && sudo apt-get install pkg-config -y
             dockeropts: --env OPENSSL_DIR=/usr
             features: "--features openssl-vendored"
             manylinux: 2_28
 
           - runner: ubuntu-22.04
             target: armv7
-            before: sudo apt-get update -y && sudo apt-get install pkg-config -y
+            before: |
+              set -e
+              sudo apt-get update -y && sudo apt-get install pkg-config -y
             dockeropts: --env OPENSSL_DIR=/usr
             features: "--features openssl-vendored"
             manylinux: auto
 
           - runner: ubuntu-22.04
             target: s390x
-            before: sudo apt-get update -y && sudo apt-get install pkg-config -y
+            before: |
+              set -e
+              sudo apt-get update -y && sudo apt-get install pkg-config -y
             dockeropts: --env OPENSSL_DIR=/usr
             features: "--features openssl-vendored"
             manylinux: auto
 
           - runner: ubuntu-22.04
             target: ppc64le
-            before: sudo apt-get update -y && sudo apt-get install pkg-config -y
+            before: |
+              set -e
+              sudo apt-get update -y && sudo apt-get install pkg-config -y
             dockeropts: --env OPENSSL_DIR=/usr
             features: "--features openssl-vendored"
             manylinux: auto
