@@ -96,7 +96,7 @@ jobs:
               --env PKG_CONFIG_ALLOW_CROSS=1
               --env PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib64/pkgconfig
               --env OPENSSL_DIR=/usr
-            features: ""
+            features: "--features openblas-system"
             manylinux: 2_28
 
           - runner: ubuntu-22.04
