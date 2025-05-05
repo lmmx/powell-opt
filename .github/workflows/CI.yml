@@ -62,6 +62,7 @@ jobs:
                 glibc-devel.i686 \
                 libstdc++-devel.i686 \
                 gcc-toolset-14-libstdc++-devel.i686 \
+                gfortran.i686 \
                 -y && \
               which gcc && \
               ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
@@ -71,15 +72,14 @@ jobs:
               # Check where the SSL libraries are located
               find /usr -name "libssl.so*" && \
               find /usr -name "libcrypto.so*" && \
-              # Create a directory for the .cargo config
               mkdir -p .cargo && \
-              # Create a cargo config file to specify build script configuration
               cat > .cargo/config.toml << EOF
+              [build]
+              target = "i686-unknown-linux-gnu"
+              rustflags = ["-C", "target-feature=+crt-static"]
+              
               [target.i686-unknown-linux-gnu]
               rustflags = ["-C", "link-arg=-m32"]
-              
-              [build]
-              rustflags = ["-C", "target-feature=+crt-static"]
               EOF
             dockeropts: >
               --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
