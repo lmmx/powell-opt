@@ -4,8 +4,8 @@ use pyo3::exceptions::{PyRuntimeError, PyValueError};
 use pyo3::prelude::*;
 use pyo3::types::PyList;
 
-use scirs2_optimize::unconstrained::{minimize, Method};
 use scirs2_optimize::OptimizeError;
+use scirs2_optimize::unconstrained::{Method, minimize};
 
 mod options;
 mod result;
