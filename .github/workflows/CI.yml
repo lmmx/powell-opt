@@ -56,7 +56,7 @@ jobs:
             manylinux: auto
 
           - runner: ubuntu-22.04
-            target: i686
+            target: i686-unknown-linux
             before: |
               # dnf search fortran
               yum install \
