@@ -50,7 +50,7 @@ jobs:
             target: x86_64
             before: |
               set -e
-              yum install -y openssl-devel
+              yum install -y openssl-devel || exit 1
             dockeropts: ""
             features: ""
             manylinux: auto
@@ -66,7 +66,8 @@ jobs:
                 libstdc++-devel.i686 \
                 gcc-toolset-14-libstdc++-devel.i686 \
                 gcc-gfortran.i686 \
-                -y && \
+                -y || exit 1
+
               which gcc && \
               ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
               ls -l /usr/bin/i686-linux-gnu-gcc && \
