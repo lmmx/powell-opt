@@ -68,6 +68,9 @@ jobs:
                 libgfortran.i686 \
                 -y || exit 1
 
+              find /usr -type f -executable -name 'gfortran*'
+              exit 3
+
               which gcc && \
               ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
               ls -l /usr/bin/i686-linux-gnu-gcc && \
