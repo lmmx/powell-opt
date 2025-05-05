@@ -58,7 +58,7 @@ jobs:
           - runner: ubuntu-22.04
             target: x86
             before: |
-              set -e
+              sudo dnf search fortran
               yum install \
                 openssl-devel.i686 \
                 openssl-devel.x86_64 \
