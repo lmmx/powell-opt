@@ -56,17 +56,31 @@ jobs:
           - runner: ubuntu-22.04
             target: x86
             before: |
-              yum install -y \
+              yum install \
                 openssl-devel.i686 \
+                openssl-devel.x86_64 \
                 glibc-devel.i686 \
                 libstdc++-devel.i686 \
                 gcc-toolset-14-libstdc++-devel.i686 \
-                && \
+                -y && \
               which gcc && \
               ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
               ls -l /usr/bin/i686-linux-gnu-gcc && \
               /usr/bin/i686-linux-gnu-gcc --version && \
-              i686-linux-gnu-gcc --version
+              i686-linux-gnu-gcc --version && \
+              # Check where the SSL libraries are located
+              find /usr -name "libssl.so*" && \
+              find /usr -name "libcrypto.so*" && \
+              # Create a directory for the .cargo config
+              mkdir -p .cargo && \
+              # Create a cargo config file to specify build script configuration
+              cat > .cargo/config.toml << EOF
+              [target.i686-unknown-linux-gnu]
+              rustflags = ["-C", "link-arg=-m32"]
+              
+              [build]
+              rustflags = ["-C", "target-feature=+crt-static"]
+              EOF
             dockeropts: >
               --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
               --env CFLAGS_i686_unknown_linux_gnu=-m32
