@@ -93,7 +93,7 @@ jobs:
               --env PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib64/pkgconfig
               --env OPENSSL_DIR=/usr
             features: ""
-            manylinux: auto
+            manylinux: 2_28
 
           - runner: ubuntu-22.04
             target: aarch64
