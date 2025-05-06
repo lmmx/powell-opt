@@ -116,7 +116,6 @@ jobs:
                 pkg-config || exit 1
 
               which gcc && \
-              ln -s $(which gcc) /usr/bin/aarch64-linux-gnu-gcc && \
               ls -l /usr/bin/aarch64-linux-gnu-gcc && \
               /usr/bin/aarch64-linux-gnu-gcc --version && \
               aarch64-linux-gnu-gcc --version && \
