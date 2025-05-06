@@ -10,7 +10,7 @@ openssl-probe = { version = "0.1", optional = true }
 
 # For cross-compilation on aarch64:
 # https://github.com/blas-lapack-rs/lapack-sys/pull/15
-[patch.crate-io]
+[patch.crates-io]
 lapack-sys = { git = "https://github.com/numrs/lapack-sys", branch = "build-rs" }
 lax = { git = "https://github.com/rust-ndarray/ndarray-linalg", branch = "master" }
 
