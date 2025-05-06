@@ -112,7 +112,7 @@ jobs:
                 crossbuild-essential-arm64 \
                 gcc-aarch64-linux-gnu \
                 g++-aarch64-linux-gnu \
-                binutils-aarch64-linux-gnu
+                binutils-aarch64-linux-gnu \
                 pkg-config || exit 1
 
               which gcc && \
