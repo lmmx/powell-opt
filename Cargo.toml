@@ -7,10 +7,11 @@ ndarray = "0.16.1"
 # https://github.com/PyO3/maturin-action/discussions/162#discussioncomment-7978369
 openssl = { version = "0.10", features = ["vendored"], optional = true }
 openblas-src = { version = "0.10", default-features = false, features = [] }
+ndarray-linalg = { version = "0.17", default-features = false, features = [] }
 openssl-probe = { version = "0.1", optional = true }
 
 [features]
-openblas-system = ["openblas-src/system"]
+openblas-system = ["openblas-src/system", "ndarray-linalg/openblas-system"]
 openssl-vendored = ["dep:openssl", "dep:openssl-probe"]
 
 [lib]
@@ -27,7 +28,7 @@ readme = "README.md"
 license = "MIT"
 
 [package.metadata.cargo-machete]
-ignored = ["openssl", "openblas-src"]
+ignored = ["openssl", "openblas-src", "ndarray-linalg"]
 
 [profile.release]
 opt-level = 2
