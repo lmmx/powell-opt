@@ -108,12 +108,13 @@ jobs:
               sudo apt-get update -y && sudo apt-get install -y \
                 libssl-dev \
                 libopenblas-dev \
+                libopenblas-dev:arm64 \
                 liblapack-dev \
+                liblapack-dev:arm64 \
+                libc6-dev-arm64-cross \
+                libstdc++-dev-arm64-cross \
+                gcc-aarch64-linux-gnu \
                 pkg-config || exit 1
-
-              echo "Finding the installed openssl libs"
-              find /usr -name "libssl.so*"
-              exit 2
 
               which gcc && \
               ln -s $(which gcc) /usr/bin/aarch64-linux-gnu-gcc && \
@@ -138,8 +139,7 @@ jobs:
               --env PKG_CONFIG_ALLOW_CROSS=1
               --env PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/aarch64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig
               --env OPENSSL_DIR=/usr
-              --env OPENSSL_LIB_DIR=/usr/lib/aarch64-linux-gnu
-              --env OPENSSL_INCLUDE_DIR=/usr/include
+              --env OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu
               --env OPENBLAS_TARGET=ARMV8
               --env OPENBLAS_CC=/usr/bin/aarch64-linux-gnu-gcc
               --env OPENBLAS_HOSTCC=/usr/bin/gcc
