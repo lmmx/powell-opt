@@ -106,9 +106,9 @@ jobs:
             target: aarch64
             before: |
               sudo apt-get update -y && sudo apt-get install -y \
-                libssl-dev:aarch64 \
-                libopenblas-dev:aarch64 \
-                liblapack-dev:aarch64 \
+                libssl-dev \
+                libopenblas-dev \
+                liblapack-dev \
                 pkg-config || exit 1
 
               echo "Finding the installed openssl libs"
