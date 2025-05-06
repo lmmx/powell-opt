@@ -8,7 +8,7 @@ openssl = { version = "0.10", features = ["vendored"], optional = true }
 ndarray-linalg = { version = "0.17" }
 openssl-probe = { version = "0.1", optional = true }
 
-[patch.crates.io]
+[patch.crates-io]
 # For cross-compilation on aarch64:
 # https://github.com/blas-lapack-rs/lapack-sys/pull/15
 lapack-sys = { git = "https://github.com/numrs/lapack-sys", branch = "build-rs" }
