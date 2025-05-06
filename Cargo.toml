@@ -26,7 +26,7 @@ readme = "README.md"
 license = "MIT"
 
 [package.metadata.cargo-machete]
-ignored = ["openssl"]
+ignored = ["openssl", "ndarray-linalg"]
 
 [profile.release]
 opt-level = 2
