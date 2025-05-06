@@ -54,6 +54,7 @@ impl PyOptions {
 }
 
 impl From<PyOptions> for Options {
+    #[cfg(not(target_arch = "aarch64"))]
     fn from(options: PyOptions) -> Self {
         Options {
             maxiter: options.maxiter,
@@ -63,6 +64,19 @@ impl From<PyOptions> for Options {
             finite_diff_rel_step: options.finite_diff_rel_step,
             disp: options.disp,
             return_all: options.return_all,
+        }
+    }
+    #[cfg(target_arch = "aarch64")]
+    fn from(options: PyOptions) -> Self {
+        Options {
+            maxiter: options.maxiter,
+            ftol: options.ftol,
+            gtol: options.gtol,
+            eps: options.eps,
+            finite_diff_rel_step: options.finite_diff_rel_step,
+            disp: options.disp,
+            return_all: options.return_all,
+            ..Options::default()
         }
     }
 }

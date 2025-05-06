@@ -97,6 +97,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5c8214115b7bf84099f1309324e63141d4c5d7cc26862f97a0a857dbefe165bd"
 
 [[package]]
+name = "blas"
+version = "0.23.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "280f3f48ac4edf086d59c7aa71fb28b78df2b14db8f591fb4eb29b88b77ac6ad"
+dependencies = [
+ "blas-sys",
+ "libc",
+ "num-complex",
+]
+
+[[package]]
+name = "blas-sys"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b49cc48acc7ead5c33d2e3cac9c47e55bfd04c929abd1456459084a8c8cdf2cb"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "bumpalo"
 version = "3.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -784,6 +804,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "ndarray-rand"
+version = "0.15.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f093b3db6fd194718dcdeea6bd8c829417deae904e3fcc7732dabcd4416d25d8"
+dependencies = [
+ "ndarray 0.16.1",
+ "rand 0.8.5",
+ "rand_distr 0.4.3",
+]
+
+[[package]]
 name = "num-bigint"
 version = "0.4.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -971,7 +1002,8 @@ dependencies = [
  "openssl",
  "openssl-probe",
  "pyo3",
- "scirs2-optimize",
+ "scirs2-optimize 0.1.0-alpha.1",
+ "scirs2-optimize 0.1.0-alpha.2",
 ]
 
 [[package]]
@@ -1296,6 +1328,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "scirs2-core"
+version = "0.1.0-alpha.2"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
+dependencies = [
+ "chrono",
+ "ndarray 0.16.1",
+ "ndarray-linalg 0.17.0",
+ "num-complex",
+ "num-traits",
+ "once_cell",
+ "rand 0.9.1",
+ "rand_distr 0.5.1",
+ "rayon",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.12",
+ "wide",
+]
+
+[[package]]
 name = "scirs2-linalg"
 version = "0.1.0-alpha.1"
 source = "git+https://github.com/lmmx/scirs?branch=test-powell-quadratic#42e7d6879e585cad387f915b2c2f7d1c8de51bc7"
@@ -1303,14 +1355,36 @@ dependencies = [
  "approx 0.5.1",
  "nalgebra",
  "ndarray 0.16.1",
- "ndarray-rand",
+ "ndarray-rand 0.14.0",
  "num-complex",
  "num-traits",
  "rand 0.9.1",
  "rand_chacha 0.9.0",
  "rand_distr 0.5.1",
  "rayon",
- "scirs2-core",
+ "scirs2-core 0.1.0-alpha.1",
+ "thiserror 2.0.12",
+ "wide",
+]
+
+[[package]]
+name = "scirs2-linalg"
+version = "0.1.0-alpha.2"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
+dependencies = [
+ "approx 0.5.1",
+ "blas",
+ "nalgebra",
+ "ndarray 0.16.1",
+ "ndarray-rand 0.15.0",
+ "num-complex",
+ "num-traits",
+ "openblas-src",
+ "rand 0.9.1",
+ "rand_chacha 0.9.0",
+ "rand_distr 0.5.1",
+ "rayon",
+ "scirs2-core 0.1.0-alpha.2",
  "thiserror 2.0.12",
  "wide",
 ]
@@ -1324,8 +1398,23 @@ dependencies = [
  "ndarray 0.16.1",
  "num-complex",
  "num-traits",
- "scirs2-core",
- "scirs2-linalg",
+ "scirs2-core 0.1.0-alpha.1",
+ "scirs2-linalg 0.1.0-alpha.1",
+ "thiserror 2.0.12",
+]
+
+[[package]]
+name = "scirs2-optimize"
+version = "0.1.0-alpha.2"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
+dependencies = [
+ "argmin",
+ "ndarray 0.16.1",
+ "num-complex",
+ "num-traits",
+ "openblas-src",
+ "scirs2-core 0.1.0-alpha.2",
+ "scirs2-linalg 0.1.0-alpha.2",
  "thiserror 2.0.12",
 ]
 
