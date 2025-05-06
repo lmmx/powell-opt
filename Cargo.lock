@@ -932,6 +932,7 @@ dependencies = [
  "approx",
  "cargo-husky",
  "ndarray",
+ "ndarray-linalg",
  "openblas-src",
  "openssl",
  "openssl-probe",
