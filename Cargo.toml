@@ -2,6 +2,15 @@
 pyo3 = "0.24.2"
 scirs2-optimize = { version = "0.1.0-alpha.1", git = "https://github.com/lmmx/scirs", branch = "test-powell-quadratic" }
 ndarray = "0.16.1"
+# For CI wheel building:
+# https://github.com/PyO3/maturin-action/discussions/162#discussioncomment-7978369
+openssl = { version = "0.10", features = ["vendored"], optional = true }
+ndarray-linalg = { version = "0.17" }
+openssl-probe = { version = "0.1", optional = true }
+
+[features]
+openblas-system = ["ndarray-linalg/openblas-system"]
+openssl-vendored = ["dep:openssl", "dep:openssl-probe"]
 
 [lib]
 name = "powell_opt"
@@ -15,6 +24,9 @@ authors = ["Louis Maddox <louismmx@gmail.com>"]
 description = "Python bindings for the Powell method from scirs2-optimize"
 readme = "README.md"
 license = "MIT"
+
+[package.metadata.cargo-machete]
+ignored = ["openssl"]
 
 [profile.release]
 opt-level = 2

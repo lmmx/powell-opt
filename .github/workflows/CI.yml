@@ -48,18 +48,95 @@ jobs:
         platform:
           - runner: ubuntu-22.04
             target: x86_64
-            before: yum install -y openssl-devel
+            before: |
+              set -e
+              yum install -y openssl-devel || exit 1
+            dockeropts: ""
+            features: ""
+            manylinux: auto
+
           - runner: ubuntu-22.04
             target: i686-unknown-linux-gnu
-            before: yum install -y openssl-devel.i686
+            before: |
+              # dnf search fortran
+              yum install \
+                openssl-devel.i686 \
+                openssl-devel.x86_64 \
+                glibc-devel.i686 \
+                libstdc++-devel.i686 \
+                gcc-toolset-14-libstdc++-devel.i686 \
+                 openblas-devel.i686 \
+                 lapack-devel.i686 \
+                -y || exit 1
+
+              which gcc && \
+              ln -s $(which gcc) /usr/bin/i686-linux-gnu-gcc && \
+              ls -l /usr/bin/i686-linux-gnu-gcc && \
+              /usr/bin/i686-linux-gnu-gcc --version && \
+              i686-linux-gnu-gcc --version && \
+              mkdir -p .cargo  || exit 1
+
+              rustup target add i686-unknown-linux-gnu
+
+              cat > .cargo/config.toml << EOF
+              [build]
+              target = "i686-unknown-linux-gnu"
+              rustflags = ["-C", "link-arg=-m32"]
+              
+              [target.i686-unknown-linux-gnu]
+              rustflags = ["-C", "link-arg=-m32"]
+              EOF
+            dockeropts: >
+              --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
+              --env CC_i686_unknown_linux_gnu=/usr/bin/i686-linux-gnu-gcc
+              --env CFLAGS_i686_unknown_linux_gnu=-m32
+              --env CFLAGS=-m32
+              --env LIBRARY_PATH=/usr/lib:/usr/lib/i386-linux-gnu:$LIBRARY_PATH
+              --env LD_LIBRARY_PATH=/usr/lib:/usr/lib/i386-linux-gnu:$LD_LIBRARY_PATH
+              --env PKG_CONFIG_ALLOW_CROSS=1
+              --env PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib64/pkgconfig
+              --env OPENSSL_DIR=/usr
+              --env OPENBLAS_TARGET=CORE2
+              --env OPENBLAS_CC=/usr/bin/i686-linux-gnu-gcc
+              --env OPENBLAS_HOSTCC=/usr/bin/gcc
+            features: "--features openblas-system"
+            manylinux: 2_28
+
           - runner: ubuntu-22.04
             target: aarch64
+            before: |
+              set -e
+              sudo apt-get update -y && sudo apt-get install pkg-config -y
+            dockeropts: --env OPENSSL_DIR=/usr
+            features: "--features openssl-vendored"
+            manylinux: 2_28
+
           - runner: ubuntu-22.04
             target: armv7
+            before: |
+              set -e
+              sudo apt-get update -y && sudo apt-get install pkg-config -y
+            dockeropts: --env OPENSSL_DIR=/usr
+            features: "--features openssl-vendored"
+            manylinux: auto
+
           - runner: ubuntu-22.04
             target: s390x
+            before: |
+              set -e
+              sudo apt-get update -y && sudo apt-get install pkg-config -y
+            dockeropts: --env OPENSSL_DIR=/usr
+            features: "--features openssl-vendored"
+            manylinux: auto
+
           - runner: ubuntu-22.04
             target: ppc64le
+            before: |
+              set -e
+              sudo apt-get update -y && sudo apt-get install pkg-config -y
+            dockeropts: --env OPENSSL_DIR=/usr
+            features: "--features openssl-vendored"
+            manylinux: auto
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -71,9 +148,10 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-          manylinux: auto
+          manylinux: ${{ matrix.platform.manylinux }}
           before-script-linux: |
             ${{ matrix.platform.before }}
+          docker-options: ${{ matrix.platform.dockeropts }}
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
