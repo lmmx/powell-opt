@@ -31,15 +31,6 @@ checksum = "e16d2d3311acee920a9eb8d33b8cbc1787ce4a264e85f964c2404b969bdcd487"
 
 [[package]]
 name = "approx"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3f2a05fd1bd10b2527e20a2cd32d8873d115b8b39fe219ee25f42a8aca6ba278"
-dependencies = [
- "num-traits",
-]
-
-[[package]]
-name = "approx"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cab112f0a86d568ea0e627cc1d6be74a1e9cd55214684db5561995f6dad897c6"
@@ -95,6 +86,26 @@ name = "bitflags"
 version = "2.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5c8214115b7bf84099f1309324e63141d4c5d7cc26862f97a0a857dbefe165bd"
+
+[[package]]
+name = "blas"
+version = "0.23.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "280f3f48ac4edf086d59c7aa71fb28b78df2b14db8f591fb4eb29b88b77ac6ad"
+dependencies = [
+ "blas-sys",
+ "libc",
+ "num-complex",
+]
+
+[[package]]
+name = "blas-sys"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b49cc48acc7ead5c33d2e3cac9c47e55bfd04c929abd1456459084a8c8cdf2cb"
+dependencies = [
+ "libc",
+]
 
 [[package]]
 name = "bumpalo"
@@ -559,20 +570,6 @@ dependencies = [
 
 [[package]]
 name = "lax"
-version = "0.16.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1f96a229d9557112e574164f8024ce703625ad9f88a90964c1780809358e53da"
-dependencies = [
- "cauchy",
- "katexit",
- "lapack-sys",
- "num-traits",
- "openblas-src",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "lax"
 version = "0.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1048f58cdc36e726e1c5ef81ec7ac9b1be2fce6b705786514b5a4f8c63487867"
@@ -666,7 +663,7 @@ version = "0.33.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "26aecdf64b707efd1310e3544d709c5c0ac61c13756046aaaba41be5c4f66a3b"
 dependencies = [
- "approx 0.5.1",
+ "approx",
  "matrixmultiply",
  "nalgebra-macros",
  "num-complex",
@@ -706,27 +703,11 @@ dependencies = [
 
 [[package]]
 name = "ndarray"
-version = "0.15.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "adb12d4e967ec485a5f71c6311fe28158e9d6f4bc4a447b474184d0f91a8fa32"
-dependencies = [
- "approx 0.4.0",
- "cblas-sys",
- "libc",
- "matrixmultiply",
- "num-complex",
- "num-integer",
- "num-traits",
- "rawpointer",
-]
-
-[[package]]
-name = "ndarray"
 version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "882ed72dce9365842bf196bdeedf5055305f11fc8c03dee7bb0194a6cad34841"
 dependencies = [
- "approx 0.5.1",
+ "approx",
  "cblas-sys",
  "libc",
  "matrixmultiply",
@@ -742,30 +723,14 @@ dependencies = [
 
 [[package]]
 name = "ndarray-linalg"
-version = "0.16.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b0e8dda0c941b64a85c5deb2b3e0144aca87aced64678adfc23eacea6d2cc42"
-dependencies = [
- "cauchy",
- "katexit",
- "lax 0.16.0",
- "ndarray 0.15.6",
- "num-complex",
- "num-traits",
- "rand 0.8.5",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "ndarray-linalg"
 version = "0.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "820b7fdcc3f1fd48c31f4c85bdefe93ef2d0e8b69ff955c4d499ea6db2f19d44"
 dependencies = [
  "cauchy",
  "katexit",
- "lax 0.17.0",
- "ndarray 0.16.1",
+ "lax",
+ "ndarray",
  "num-complex",
  "num-traits",
  "rand 0.8.5",
@@ -774,11 +739,11 @@ dependencies = [
 
 [[package]]
 name = "ndarray-rand"
-version = "0.14.0"
+version = "0.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "65608f937acc725f5b164dcf40f4f0bc5d67dc268ab8a649d3002606718c4588"
+checksum = "f093b3db6fd194718dcdeea6bd8c829417deae904e3fcc7732dabcd4416d25d8"
 dependencies = [
- "ndarray 0.15.6",
+ "ndarray",
  "rand 0.8.5",
  "rand_distr 0.4.3",
 ]
@@ -964,10 +929,10 @@ dependencies = [
 name = "powell-opt"
 version = "0.1.0"
 dependencies = [
- "approx 0.5.1",
+ "approx",
  "cargo-husky",
- "ndarray 0.16.1",
- "ndarray-linalg 0.17.0",
+ "ndarray",
+ "ndarray-linalg",
  "openssl",
  "openssl-probe",
  "pyo3",
@@ -1277,12 +1242,12 @@ dependencies = [
 
 [[package]]
 name = "scirs2-core"
-version = "0.1.0-alpha.1"
-source = "git+https://github.com/lmmx/scirs?branch=test-powell-quadratic#42e7d6879e585cad387f915b2c2f7d1c8de51bc7"
+version = "0.1.0-alpha.2"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
 dependencies = [
  "chrono",
- "ndarray 0.16.1",
- "ndarray-linalg 0.16.0",
+ "ndarray",
+ "ndarray-linalg",
  "num-complex",
  "num-traits",
  "once_cell",
@@ -1297,15 +1262,17 @@ dependencies = [
 
 [[package]]
 name = "scirs2-linalg"
-version = "0.1.0-alpha.1"
-source = "git+https://github.com/lmmx/scirs?branch=test-powell-quadratic#42e7d6879e585cad387f915b2c2f7d1c8de51bc7"
+version = "0.1.0-alpha.2"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
 dependencies = [
- "approx 0.5.1",
+ "approx",
+ "blas",
  "nalgebra",
- "ndarray 0.16.1",
+ "ndarray",
  "ndarray-rand",
  "num-complex",
  "num-traits",
+ "openblas-src",
  "rand 0.9.1",
  "rand_chacha 0.9.0",
  "rand_distr 0.5.1",
@@ -1317,13 +1284,14 @@ dependencies = [
 
 [[package]]
 name = "scirs2-optimize"
-version = "0.1.0-alpha.1"
-source = "git+https://github.com/lmmx/scirs?branch=test-powell-quadratic#42e7d6879e585cad387f915b2c2f7d1c8de51bc7"
+version = "0.1.0-alpha.2"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
 dependencies = [
  "argmin",
- "ndarray 0.16.1",
+ "ndarray",
  "num-complex",
  "num-traits",
+ "openblas-src",
  "scirs2-core",
  "scirs2-linalg",
  "thiserror 2.0.12",
@@ -1396,7 +1364,7 @@ version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b3a386a501cd104797982c15ae17aafe8b9261315b5d07e3ec803f2ea26be0fa"
 dependencies = [
- "approx 0.5.1",
+ "approx",
  "num-complex",
  "num-traits",
  "paste",
