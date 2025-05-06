@@ -14,6 +14,9 @@ openssl-probe = { version = "0.1", optional = true }
 lapack-sys = { git = "https://github.com/numrs/lapack-sys", branch = "build-rs" }
 lax = { git = "https://github.com/rust-ndarray/ndarray-linalg", branch = "master", package = "lax" }
 
+[replace]
+"lax:0.16.0" = { git = "https://github.com/rust-ndarray/ndarray-linalg", branch = "master", package = "lax" }
+
 [features]
 openblas-system = ["ndarray-linalg/openblas-system"]
 openssl-vendored = ["dep:openssl", "dep:openssl-probe"]
