@@ -1,6 +1,6 @@
 [dependencies]
 pyo3 = "0.24.2"
-scirs2-optimize = { version = "0.1.0-alpha.2", git = "https://github.com/cool-japan/scirs", branch = "dependabot/cargo/ndarray-linalg-0.17.0" }
+scirs2-optimize = { version = "0.1.0-alpha.2", git = "https://github.com/lmmx/scirs", branch = "patch-1" }
 # this branch has v0.17 of scirs: dependabot/cargo/ndarray-linalg-0.17.0
 ndarray = "0.16.1"
 # For CI wheel building:
@@ -33,7 +33,7 @@ readme = "README.md"
 license = "MIT"
 
 [package.metadata.cargo-machete]
-ignored = ["openssl"]
+ignored = ["openssl", "ndarray-linalg"]
 
 [profile.release]
 opt-level = 2
