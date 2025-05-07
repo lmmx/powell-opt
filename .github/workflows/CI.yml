@@ -143,7 +143,8 @@ jobs:
               --env OPENBLAS_TARGET=ARMV8
               --env OPENBLAS_CC=/usr/bin/aarch64-linux-gnu-gcc
               --env OPENBLAS_HOSTCC=/usr/bin/gcc
-            features: "--features openssl-vendored,openblas-system"
+            features: "--features openssl-vendored"
+            #features: "--features openssl-vendored,openblas-system"
             manylinux: auto
 
           - runner: ubuntu-22.04
