@@ -4,8 +4,13 @@ use pyo3::exceptions::{PyRuntimeError, PyValueError};
 use pyo3::prelude::*;
 use pyo3::types::PyList;
 
-use scirs2_optimize::OptimizeError;
-use scirs2_optimize::unconstrained::{Method, minimize};
+// For Linux aarch64
+#[cfg(all(target_arch = "aarch64", target_os = "linux"))]
+use scirs2_optimize_aarch64::{OptimizeError, unconstrained::{Method, minimize}};
+
+// For everything else (non-aarch64 or non-Linux)
+#[cfg(not(all(target_arch = "aarch64", target_os = "linux")))]
+use scirs2_optimize::{OptimizeError, unconstrained::{Method, minimize}};
 
 mod options;
 mod result;
