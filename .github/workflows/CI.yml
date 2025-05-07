@@ -25,7 +25,6 @@ jobs:
       - name: Confirm commit message matched
         run: |
           echo "Commit message matched the condition."
-          rm build.rs || exit 1
   #   # This job only runs if the commit message meets the condition
   #   if: >
   #     (

@@ -1,4 +1,7 @@
 // lib.rs
+#[cfg(feature = "local-build")]
+extern crate openblas_src;
+
 use pyo3::exceptions::PyNotImplementedError;
 use pyo3::exceptions::{PyRuntimeError, PyValueError};
 use pyo3::prelude::*;
