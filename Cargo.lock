@@ -583,20 +583,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "lax"
-version = "0.17.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1048f58cdc36e726e1c5ef81ec7ac9b1be2fce6b705786514b5a4f8c63487867"
-dependencies = [
- "cauchy",
- "katexit",
- "lapack-sys",
- "num-traits",
- "openblas-src",
- "thiserror 2.0.12",
-]
-
-[[package]]
 name = "libc"
 version = "0.2.172"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -604,9 +590,9 @@ checksum = "d750af042f7ef4f724306de029d18836c26c1765a54a6a3f094cbd23a7267ffa"
 
 [[package]]
 name = "libm"
-version = "0.2.13"
+version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c9627da5196e5d8ed0b0495e61e518847578da83483c37288316d9b2e03a7f72"
+checksum = "f9fbbcab51052fe104eb5e5d351cf728d30a5be1fe14d9be8a3b097481fb97de"
 
 [[package]]
 name = "libredox"
@@ -745,22 +731,6 @@ dependencies = [
  "katexit",
  "lax",
  "ndarray",
- "num-complex",
- "num-traits",
- "rand 0.8.5",
- "thiserror 2.0.12",
-]
-
-[[package]]
-name = "ndarray-linalg"
-version = "0.17.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "820b7fdcc3f1fd48c31f4c85bdefe93ef2d0e8b69ff955c4d499ea6db2f19d44"
-dependencies = [
- "cauchy",
- "katexit",
- "lax 0.17.0",
- "ndarray 0.16.1",
  "num-complex",
  "num-traits",
  "rand 0.8.5",
@@ -1181,9 +1151,9 @@ dependencies = [
 
 [[package]]
 name = "redox_syscall"
-version = "0.5.11"
+version = "0.5.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2f103c6d277498fbceb16e84d317e2a400f160f46904d5f5410848c829511a3"
+checksum = "928fca9cf2aa042393a8325b9ead81d2f0df4cb12e1e24cef072922ccd99c5af"
 dependencies = [
  "bitflags",
 ]
@@ -1273,7 +1243,7 @@ dependencies = [
 [[package]]
 name = "scirs2-core"
 version = "0.1.0-alpha.2"
-source = "git+https://github.com/lmmx/scirs?branch=patch-1#782ef5e7dd834cfbaaadbfc674dd77b471310c38"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
 dependencies = [
  "chrono",
  "ndarray",
@@ -1293,7 +1263,7 @@ dependencies = [
 [[package]]
 name = "scirs2-linalg"
 version = "0.1.0-alpha.2"
-source = "git+https://github.com/lmmx/scirs?branch=patch-1#782ef5e7dd834cfbaaadbfc674dd77b471310c38"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
 dependencies = [
  "approx",
  "blas",
@@ -1315,7 +1285,7 @@ dependencies = [
 [[package]]
 name = "scirs2-optimize"
 version = "0.1.0-alpha.2"
-source = "git+https://github.com/lmmx/scirs?branch=patch-1#782ef5e7dd834cfbaaadbfc674dd77b471310c38"
+source = "git+https://github.com/lmmx/scirs?branch=patch-1#e8254d0423ac0533a14cfd7647321d374599e632"
 dependencies = [
  "argmin",
  "ndarray",
