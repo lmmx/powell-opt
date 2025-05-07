@@ -53,7 +53,7 @@ jobs:
               set -e
               yum install -y openssl-devel || exit 1
             dockeropts: ""
-            features: ""
+            features: "--features ci-build"
             manylinux: auto
 
           - runner: ubuntu-22.04
@@ -100,7 +100,7 @@ jobs:
               --env OPENBLAS_TARGET=CORE2
               --env OPENBLAS_CC=/usr/bin/i686-linux-gnu-gcc
               --env OPENBLAS_HOSTCC=/usr/bin/gcc
-            features: "--features openblas-system"
+            features: "--features ci-build,openblas-system"
             manylinux: 2_28
 
           - runner: ubuntu-22.04
@@ -142,7 +142,7 @@ jobs:
               --env OPENBLAS_TARGET=ARMV8
               --env OPENBLAS_CC=/usr/bin/aarch64-linux-gnu-gcc
               --env OPENBLAS_HOSTCC=/usr/bin/gcc
-            features: "--features openssl-vendored,openblas-system"
+            features: "--features openssl-vendored,openblas-system,ci-build"
             manylinux: auto
 
           - runner: ubuntu-22.04
