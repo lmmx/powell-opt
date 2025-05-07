@@ -23,7 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Confirm commit message matched
-        run: echo "Commit message matched the condition."
+        run: |
+          echo "Commit message matched the condition."
   #   # This job only runs if the commit message meets the condition
   #   if: >
   #     (
@@ -52,7 +53,7 @@ jobs:
               set -e
               yum install -y openssl-devel || exit 1
             dockeropts: ""
-            features: ""
+            features: "--features ci-build"
             manylinux: auto
 
           - runner: ubuntu-22.04
@@ -99,17 +100,50 @@ jobs:
               --env OPENBLAS_TARGET=CORE2
               --env OPENBLAS_CC=/usr/bin/i686-linux-gnu-gcc
               --env OPENBLAS_HOSTCC=/usr/bin/gcc
-            features: "--features openblas-system"
+            features: "--features ci-build,openblas-system"
             manylinux: 2_28
 
           - runner: ubuntu-22.04
             target: aarch64
             before: |
-              set -e
-              sudo apt-get update -y && sudo apt-get install pkg-config -y
-            dockeropts: --env OPENSSL_DIR=/usr
-            features: "--features openssl-vendored"
-            manylinux: 2_28
+              sudo apt-get update -y && sudo apt-get install -y \
+                libssl-dev \
+                libopenblas-dev \
+                liblapack-dev \
+                crossbuild-essential-arm64 \
+                gcc-aarch64-linux-gnu \
+                g++-aarch64-linux-gnu \
+                binutils-aarch64-linux-gnu \
+                pkg-config || exit 1
+
+              which gcc && \
+              ls -l /usr/bin/aarch64-linux-gnu-gcc && \
+              /usr/bin/aarch64-linux-gnu-gcc --version && \
+              aarch64-linux-gnu-gcc --version && \
+              mkdir -p .cargo || exit 1
+
+              rustup target add aarch64-unknown-linux-gnu
+
+              cat > .cargo/config.toml << EOF
+              [build]
+              target = "aarch64-unknown-linux-gnu"
+
+              [target.aarch64-unknown-linux-gnu]
+              # no extra rustflags
+              EOF
+            dockeropts: >
+              --env CC_aarch64_unknown_linux_gnu=/usr/bin/aarch64-linux-gnu-gcc
+              --env LIBRARY_PATH=/usr/lib:/usr/lib/aarch64-linux-gnu:$LIBRARY_PATH
+              --env LD_LIBRARY_PATH=/usr/lib:/usr/lib/aarch64-linux-gnu:$LD_LIBRARY_PATH
+              --env PKG_CONFIG_ALLOW_CROSS=1
+              --env PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib/aarch64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig
+              --env OPENSSL_DIR=/usr
+              --env OPENSSL_LIB_DIR=/usr/lib/x86_64-linux-gnu
+              --env OPENBLAS_TARGET=ARMV8
+              --env OPENBLAS_CC=/usr/bin/aarch64-linux-gnu-gcc
+              --env OPENBLAS_HOSTCC=/usr/bin/gcc
+            features: "--features openssl-vendored,openblas-system,ci-build"
+            manylinux: auto
 
           - runner: ubuntu-22.04
             target: armv7
@@ -146,7 +180,7 @@ jobs:
         uses: PyO3/maturin-action@aef21716ff3dcae8a1c301d23ec3e4446972a6e3 # v1.49.1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --find-interpreter
+          args: --release --out dist --find-interpreter ${{ matrix.platform.features }} --no-default-features
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
           before-script-linux: |

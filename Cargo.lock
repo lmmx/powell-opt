@@ -999,6 +999,7 @@ dependencies = [
  "cargo-husky",
  "ndarray 0.16.1",
  "ndarray-linalg 0.17.0",
+ "openblas-src",
  "openssl",
  "openssl-probe",
  "pyo3",
