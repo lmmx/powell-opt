@@ -1,6 +1,13 @@
 use super::*;
 use approx::assert_relative_eq;
 use ndarray::Array1;
+
+// For Linux aarch64
+#[cfg(all(target_arch = "aarch64", target_os = "linux"))]
+use scirs2_optimize_aarch64::unconstrained::Options;
+
+// For everything else (non-aarch64 or non-Linux)
+#[cfg(not(all(target_arch = "aarch64", target_os = "linux")))]
 use scirs2_optimize::unconstrained::Options;
 
 fn quadratic(x: &[f64]) -> f64 {
