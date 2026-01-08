@@ -9,15 +9,16 @@ openssl-probe = { version = "0.1", optional = true }
 
 #scirs2-optimize = { version = "0.1.0-alpha.1", git = "https://github.com/lmmx/scirs", branch = "test-powell-quadratic" }
 #scirs2-optimize = { version = "0.1.0-alpha.2", git = "https://github.com/lmmx/scirs", branch = "patch-1" }
+scirs2_optimize = { package = "scirs2-optimize", version = "0.1.0-alpha.2", git = "https://github.com/cool-japan/scirs", branch = "master" }
 
 # This branch won't work with aarch64 cross-compilation (lax v0.17.0 shipped a fix)
 # https://github.com/rust-ndarray/ndarray-linalg/pull/354
-[target.'cfg(not(target_arch = "aarch64"))'.dependencies]
-scirs2_optimize = { package = "scirs2-optimize", version = "0.1.0-alpha.1", git = "https://github.com/lmmx/scirs", branch = "test-powell-quadratic" }
-
-# This branch makes i686 behave oddly, gate it to just use on aarch64
-[target.aarch64-unknown-linux-gnu.dependencies]
-scirs2_optimize_aarch64 = { package = "scirs2-optimize", version = "0.1.0-alpha.2", git = "https://github.com/lmmx/scirs", branch = "patch-1" }
+# [target.'cfg(not(target_arch = "aarch64"))'.dependencies]
+# scirs2_optimize = { package = "scirs2-optimize", version = "0.1.0-alpha.1", git = "https://github.com/lmmx/scirs", branch = "test-powell-quadratic" }
+# 
+# # This branch makes i686 behave oddly, gate it to just use on aarch64
+# [target.aarch64-unknown-linux-gnu.dependencies]
+# scirs2_optimize_aarch64 = { package = "scirs2-optimize", version = "0.1.0-alpha.2", git = "https://github.com/lmmx/scirs", branch = "patch-1" }
 
 [features]
 openblas-system = ["ndarray-linalg/openblas-system"]
