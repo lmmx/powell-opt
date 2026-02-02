@@ -64,6 +64,7 @@ impl From<PyOptions> for Options {
             finite_diff_rel_step: options.finite_diff_rel_step,
             disp: options.disp,
             return_all: options.return_all,
+            ..Options::default()
         }
     }
     #[cfg(target_arch = "aarch64")]
