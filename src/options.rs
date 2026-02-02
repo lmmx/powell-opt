@@ -1,5 +1,12 @@
 // options.rs
 use pyo3::prelude::*;
+
+// For Linux aarch64
+#[cfg(all(target_arch = "aarch64", target_os = "linux"))]
+use scirs2_optimize_aarch64::unconstrained::Options;
+
+// For everything else (non-aarch64 or non-Linux)
+#[cfg(not(all(target_arch = "aarch64", target_os = "linux")))]
 use scirs2_optimize::unconstrained::Options;
 
 /// Options for the Powell optimizer
